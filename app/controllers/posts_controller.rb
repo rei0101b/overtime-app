@@ -20,6 +20,7 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to @post, notice: 'You post was created successfully'
     else
+      # flash.now[:notice] = 'You post was not created'
       render :new
     end
   end
