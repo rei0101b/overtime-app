@@ -11,10 +11,7 @@ class UserDashboard < Administrate::BaseDashboard
     posts: Field::HasMany,
     id: Field::Number,
     email: Field::String,
-    encrypted_password: Field::String,
-    reset_password_token: Field::String,
-    reset_password_sent_at: Field::DateTime,
-    remember_created_at: Field::DateTime,
+    password: Field::String,
     sign_in_count: Field::Number,
     current_sign_in_at: Field::DateTime,
     last_sign_in_at: Field::DateTime,
@@ -36,7 +33,7 @@ class UserDashboard < Administrate::BaseDashboard
   posts
   id
   email
-  encrypted_password
+  type
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -45,10 +42,6 @@ class UserDashboard < Administrate::BaseDashboard
   posts
   id
   email
-  encrypted_password
-  reset_password_token
-  reset_password_sent_at
-  remember_created_at
   sign_in_count
   current_sign_in_at
   last_sign_in_at
@@ -56,7 +49,6 @@ class UserDashboard < Administrate::BaseDashboard
   last_sign_in_ip
   first_name
   last_name
-  type
   created_at
   updated_at
   ].freeze
@@ -64,21 +56,11 @@ class UserDashboard < Administrate::BaseDashboard
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
-  FORM_ATTRIBUTES = %i[
-  posts
-  email
-  encrypted_password
-  reset_password_token
-  reset_password_sent_at
-  remember_created_at
-  sign_in_count
-  current_sign_in_at
-  last_sign_in_at
-  current_sign_in_ip
-  last_sign_in_ip
-  first_name
-  last_name
-  type
+FORM_ATTRIBUTES = [
+    :email,
+    :password,
+    :first_name,
+    :last_name,
   ].freeze
 
   # COLLECTION_FILTERS
@@ -93,10 +75,11 @@ class UserDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how users are displayed
+  # Overwrite this method to customize how admin users are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(user)
-  #   "User ##{user.id}"
+  # def display_resource(admin_user)
+  #   "AdminUser ##{admin_user.id}"
   # end
+
 end
